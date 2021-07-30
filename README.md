@@ -24,23 +24,25 @@ Access ELK at http://your_ip:5601. In order to get all the visualization you nee
 
 ![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/kibana_menu.png?raw=true) ![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/kibana_stack_mgmt_index_patterns.png?raw=true)
 
- Fom this point the ELK is ready to receive logs, go to Dashboard and you will see the one preconfigured to disaply Device ID information.
+ From this point the ELK is ready to receive logs, go to Dashboard and you will see the one preconfigured to display Device ID information.
 
- Image
+![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/menu_dashboard.png?raw=true) 
 
- Image
+![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/dashboard.png?raw=true) 
+
+ ####
 
 In order to get access to DeviceID+ you must create an account in Volterra, go to system and Shape Device ID.
 
-Image
+![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/volterra_device_ID.png?raw=true)
 
 Enable this feature and then start by clicking on add applications. There are several ways to add Device ID onto applications but we will use iApps. Follow the wizard to get the latest iApp and Device ID JS that will be used later on.
 
-Image
+![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/did_wizard.png?raw=true)
 
 On your BIG-IP import the iApp in iApps > Templates > Templates, to deploy the iApp go to iApps > Application Services > Applications and click on Create. Add the JS you got from Volterra Shape Device ID and select the Virtual Server where you want to add Device ID.
 
-Image
+Image![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/iapp_screenshot.png?raw=true)
 
 Note: Device ID requires connection to the internet, verify your BIG-IP have access.
 
