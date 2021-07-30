@@ -4,6 +4,7 @@ when HTTP_REQUEST {
     set collectauthcode 0
     # set check_content 1 if you expect to detect successful login on the form response
     set check_content 0
+    set login_failed "Login failed"
      # set check_redirect 1 if you expect to detect successful login based on redirect location. Also set the expected location string.
     set check_redirect 1
     set location_string "index.php"
@@ -111,7 +112,7 @@ when HTTP_REQUEST_DATA {
 
 when HTTP_RESPONSE {
    set status_code [HTTP::status]
-   log local0. "setf5did: $setf5did"
+   #log local0. "setf5did: $setf5did"
    if {$setf5did == 1} {
         HTTP::cookie insert name "f5did" value $uName path "/"
    }
@@ -125,7 +126,7 @@ when HTTP_RESPONSE {
         set uName "empty"
    }
    if {$collectauthcode == 0} {
-       log local0. "Debug: [HTTP::header is_redirect] | $collectflag | [HTTP::header value "Location"] | [HTTP::cookie names] "
+       #log local0. "Debug: [HTTP::header is_redirect] | $collectflag | [HTTP::header value "Location"] | [HTTP::cookie names] "
        if { ($check_redirect) && ($collectflag) && ([HTTP::header is_redirect]) && ([HTTP::header value "Location"] == $location_string) } { set authcode 1} 
        if { ($check_redirect) && ($collectflag) && ([HTTP::header is_redirect]) && ([HTTP::header value "Location"] != $location_string) } { set authcode 2}  
        set timestamp [clock clicks -milliseconds]
@@ -148,18 +149,14 @@ when HTTP_RESPONSE_DATA {
     if {$collectauthcode == 1} {
         set payload [HTTP::payload $content_length]
         set authcode 1
-        if {$payload contains "Login failed"} {
+        if {$payload contains $login_failed} {
             set authcode 2
-        }
-        if {$payload contains "invalid captcha"} {
-            set authcode 3
         }
        HTTP::release
        set timestamp [clock clicks -milliseconds]
        set logString "<190>#${timestamp}#${uName}#${virtual}#${client_ip}#${client_port}#${xff_ip}#${lb_server}#${http_host}#${http_method}#${http_request_uri}#${status_code}#${content_type}#${content_length}#${deviceida}#${deviceidb}#${http_user_agent}#$authcode#"
        set hsl [HSL::open -proto UDP -pool ELK]
-       log local0. "#############"
        HSL::send $hsl "$logString"
-       log local0.info "$logString"
+       #log local0.info "$logString"
     }
 }
