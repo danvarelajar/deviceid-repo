@@ -22,7 +22,7 @@ Access ELK at http://your_ip:5601. In order to get all the visualization you nee
  - go to the Menu and click on stack management at the bottom.
  - click on Saved objects and import the file export.ndjson.
 
-![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/images/kibana_menu.png?raw=true) ![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/images/kibana_stack_mgmt_index_patterns.png?raw=true)
+![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/kibana_menu.png?raw=true) ![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/kibana_stack_mgmt_index_patterns.png?raw=true)
 
  Fom this point the ELK is ready to receive logs, go to Dashboard and you will see the one preconfigured to disaply Device ID information.
 
