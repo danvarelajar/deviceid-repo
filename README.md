@@ -9,7 +9,7 @@ vm.max_map_count=262144
 ```
 Then
 ```
-sudo sysctl -
+sudo sysctl -p
 ````
 
 Run the docker image (replace with your own image if using your own image and a private repository):
