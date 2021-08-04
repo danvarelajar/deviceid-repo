@@ -1,9 +1,9 @@
 # Device ID + POV
 
-This repository contains the elements needed to run a quick POV of DeviceID+. You can find details about DeviceID+ [here](https://f5cloudservices.zendesk.com/hc/en-us/articles/360058428514-About-F5-Device-ID-){:target="\_blank"}  and the two identiafiers aproach (diA and diB) [here](https://f5cloudservices.zendesk.com/hc/en-us/articles/360060250913){:target="\_blank"}. 
+This repository contains the elements needed to run a quick POV of DeviceID+. You can find details about DeviceID+ [here](https://f5cloudservices.zendesk.com/hc/en-us/articles/360058428514-About-F5-Device-ID-)  and the two identiafiers aproach (diA and diB) [here](https://f5cloudservices.zendesk.com/hc/en-us/articles/360060250913). 
 The idea is to integrate DeviceID+ in an application, collect device information and send it to a small containarized ELK where we display and correlate information.
 
-For the ELK container image you can create your own using the Dockerfile or you can use a ready one in Docker Hub: danivarela/elk-did:1.6. The image runs with a minimum of 2vCPUs and 4GiB, depending of the ammount of traffic to analyze you may require more resources. For easiness you can use docker in a Linux host, if you need to install it you can find [here](https://docs.docker.com/engine/install/){:target="\blank"} how to do it. 
+For the ELK container image you can create your own using the Dockerfile or you can use a ready one in Docker Hub: danivarela/elk-did:1.6. The image runs with a minimum of 2vCPUs and 4GiB, depending of the ammount of traffic to analyze you may require more resources. For easiness you can use docker in a Linux host, if you need to install it you can find [here](https://docs.docker.com/engine/install/) how to do it. 
 Before we start, add the following line into /etc/sysctl.conf on your host.
 ```
 vm.max_map_count=262144
