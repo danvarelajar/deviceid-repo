@@ -51,7 +51,7 @@ Once the iApp is deployed you will need to import an irule (did_logging.irule in
 
  - set login_uri, logout_uri and username_form_name (this is the paramenter name that is sent in the POST for the username) accordingly. Review the application for this, it will require some inspection but it is an easy task.
  - set check content to 1 if you expect the application to respond with a page and specific content when the user authenticates successfuly. Set login_failed to the expected string to detect a login failed.
- - set check_redirect to 1 if you detect successful login looking at http redirect. Set location_string to the exact redirect string sent by the server.
+ - set check_redirect to 1 if you detect successful login by looking at the http response redirect. Set location_string to the exact redirect string sent by the server.
 
  Last, create a pool with name ELK and member ELK ip address and port 1514.
 
