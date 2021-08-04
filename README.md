@@ -47,10 +47,11 @@ Image![alt text](https://github.com/danvarelajar/deviceid-repo/blob/main/Images/
 
 Note: Device ID requires connection to the internet, verify your BIG-IP have access.
 
-Once the iApp is deployed you will need to add an irule (did_logging.irule) to enable HSL logging and send the details about devices and usernames. As we capture the login form username and this will vary between applications, we have tried to capture the most common use cases and for that there are some things we need to change at the begining of the irule:
+Once the iApp is deployed you will need to import an irule (did_logging.irule in this repo) to enable HSL logging and send the details about devices and usernames. This irule needs to be attached directly in the virtual server where you enabled DeviceID+ and needs to be in the top of the list of irules (at least above the irule the iApp added) As we capture the login form username and this will vary between applications, we have tried to capture the most common use cases and for that there are some things we need to change at the begining of the irule:
 
  - set login_uri, logout_uri and username_form_name (this is the paramenter name that is sent in the POST for the username) accordingly. Review the application for this, it will require some inspection but it is an easy task.
- - set check content if you expect the application to respond with a page and specific content when the user authenticates successfuly. Set login_failed to the expected string to detect a login failed.
+ - set check content to 1 if you expect the application to respond with a page and specific content when the user authenticates successfuly. Set login_failed to the expected string to detect a login failed.
+ - set check_redirect to 1 if you detect successful login looking at http redirect. Set location_string to the exact redirect string sent by the server.
 
  Last, create a pool with name ELK and member ELK ip address and port 1514.
 
