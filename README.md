@@ -1,4 +1,4 @@
-# Device ID + POV
+# Device ID+ Proof Of Value
 
 This repository contains the elements needed to run a quick POV of DeviceID+. You can find details about DeviceID+ [here](https://f5cloudservices.zendesk.com/hc/en-us/articles/360058428514-About-F5-Device-ID-)  and the two identiafiers aproach (diA and diB) [here](https://f5cloudservices.zendesk.com/hc/en-us/articles/360060250913). 
 The idea is to integrate DeviceID+ in an application, collect device information and send it to a small containarized ELK where we display and correlate information.
