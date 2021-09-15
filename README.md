@@ -56,6 +56,66 @@ Once the iApp is deployed you will need to import an irule (did_logging.irule in
  Last, create a pool with name ELK and member ELK ip address and port 1514.
 
  After all the steps you are ready to enjoy Device ID+.
+ 
+ # Device ID+ with Advanced WAF
 
+In case you are deploying Device ID+ with Advanced WAF then the configuration changes a little bit. 
+ - There is no need to deploy the irule or create the ELK pool. We just neet to create a logging profile that logs all requests with the maximum request size and with splunk format. This logging profile will point to the ELK container.
+ - Add the logging profile to the virtual server with the security policy you would like to get Device ID+ insights.
+ - There are additionals element we need to configure in ELK:
+   - Ingest Node Pipelines: In stack management go to Ingest Node Pipelines and create a new one. Name it "ingest_slat" and import the following processor, then click on create:
+```
+{
+  "processors": [
+    {
+      "convert": {
+        "field": "geoip.location.lon",
+        "type": "string",
+        "target_field": "location.lon",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "convert": {
+        "field": "geoip.location.lat",
+        "type": "string",
+        "target_field": "location.lat",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
+```
+   - Create a new index template: Go to stack management, index management and click in index templates. Create a new one and follow the steps. Name it "template_slat" and set index pattern as slat.logs-*. Skip component templates. On index setting paste the following code
+```
+{
+  "index": {
+    "default_pipeline": "ingest-slat"
+  }
+}
+```
+   - On mappings select load JSON and paste the following code:
+```
+{
+  "properties": {
+    "@timestamp": {
+      "type": "date"
+    },
+    "source_host": {
+      "index": true,
+      "store": false,
+      "type": "ip",
+      "doc_values": true
+    },
+    "location": {
+      "type": "geo_point"
+    }
+  }
+}
+```
+   - follow the steps and leave them as default. Finish by clicking on create at the last step.
+   - Lastly go to stack management, saved object and click import to load export_waf-did.ndjson files and get the WAF-DID dashboard.
 
-
+###
