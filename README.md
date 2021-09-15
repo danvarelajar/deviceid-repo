@@ -15,7 +15,7 @@ sudo sysctl -p
 
 Run the docker image (replace with your own image if using your own image and a private repository):
 ````
-docker run -d -p 5044:5044 -p 5601:5601 -p 1513-1515:1513-1515/udp -p 9200:9200 -p 9600:9600 --name elk danivarela/elk-did:1.6
+docker run -d -p 5044:5044 -p 5601:5601 -p 1513-1515:1513-1515/udp -p 9200:9200 -p 9600:9600 --name elk danivarela/elk-did:1.7
 ````
 
 Access ELK at http://your_ip:5601. In order to get all the visualization you need to import some objects, this is in export.ndjson file:
