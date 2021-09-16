@@ -63,7 +63,7 @@ In case you are deploying Device ID+ with Advanced WAF then the configuration ch
  - There is no need to deploy the irule or create the ELK pool. We just neet to create a logging profile that logs all requests with the maximum request size and with splunk format. This logging profile will point to the ELK container.
  - Add the logging profile to the virtual server with the security policy you would like to get Device ID+ insights.
  - There are additionals element we need to configure in ELK:
-   - Ingest Node Pipelines: In stack management go to Ingest Node Pipelines and create a new one. Name it "ingest_slat" and import the following processor, then click on create:
+   - Ingest Node Pipelines: In stack management go to Ingest Node Pipelines and create a new one. Name it "ingest-slat" and import the following processor, then click on create:
 ```
 {
   "processors": [
